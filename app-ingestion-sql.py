@@ -1,12 +1,21 @@
-import psycopg2
-from faker import Faker
+#Gerar dados rondomicos
 import random
+#Interagir com o postgres
+import psycopg2
+#Gerar dados fakes
+from faker import Faker
+#Carregar variavesi de ambeinte
 from dotenv import load_dotenv
 import os
+
+# Cria ingestão(insert) de dados para banco de dados relacional no RDS-AWS
 
 def createTables(cur):
     try:
         # Cria a tabela Customers
+
+        # Usado notação de aspas triplas do Python para definir strings 
+        # que se estendem por múltiplas linhas para armazenar consultas SQL
         cur.execute("""
         CREATE TABLE Customers (
             id SERIAL PRIMARY KEY,

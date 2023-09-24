@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 .env
+=======
+# Ignore arquivos relacionados às chaves de API
+.Env
+README.md
+>>>>>>> a32c8cb384dc41514568a9fb865ba58e80807fe4

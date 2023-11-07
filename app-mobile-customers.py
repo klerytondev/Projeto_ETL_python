@@ -14,6 +14,7 @@ numEvents = 100
 load_dotenv()
 
 # Define classe de codificação personalizada
+
 class CustomEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
@@ -80,23 +81,23 @@ for i in range(numEvents):
         'estoque_id': fake.random_int(min=1, max=100),
         'price': Decimal(str(round(fake.pyfloat(left_digits=2, right_digits=2, positive=True), 2))),
         'estoque_id_number': fake.random_int(min=10, max=100),
-        'price': Decimal(str(round(fake.pyfloat(left_digits=2, right_digits=2, positive=True), 2)))
     }
-    
+
     # Combina dados do usuário e do evento em um único objeto
     data = {
         'user': user_data,
         'event': event_data
     }
 
-    # Escreve dados em um arquivo JSON localmente
     now = datetime.now()
     frt_date = now.strftime("%d_%m_%Y_%H_%M_%S")
 
-    with open(f"event_customers_mobile{i}_{frt_date}.json", "w") as f:
-        time.sleep(1)
-        json.dump(data, f, cls=CustomEncoder)
+    # Escreve dados em um arquivo JSON localmente
+    # with open(f"event_customers_mobile{i}_{frt_date}.json", "w") as f:
+    #     time.sleep(1)
+    #     json.dump(data, f, cls=CustomEncoder)
 
     # # Salva os dados em arquivos json no bucket S3
-    #time.sleep(3)
-    s3.Object(bucket_name, f"event_customers_mobile{i}_{frt_date}.json").put(Body=json.dumps(data, cls=CustomEncoder))
+    # time.sleep(3)
+    s3.Object(bucket_name, f"event_customers_mobile{i}_{frt_date}.json").put(
+        Body=json.dumps(data, cls=CustomEncoder))
